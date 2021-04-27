@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
+
+Route::get('/test','App\Http\Controllers\HomeController@test')->name('test');
+Route::post('/test','App\Http\Controllers\HomeController@uploadImage')->name('upload');
+
+Route::get('auth/google', 'App\Http\Controllers\GoogleController@redirectToGoogle');
+Route::get('auth/google/callback', 'App\Http\Controllers\GoogleController@handleGoogleCallback');
