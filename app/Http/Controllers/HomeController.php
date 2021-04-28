@@ -23,13 +23,11 @@ class HomeController
 
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('images'), $imageName);
-
         $path = public_path('images/' . $imageName);
 
         $client = new Client();
 
-        $response = $client->get('https://606de307603ded0017504c23.mockapi.io/api/v1/data/1?image=' . $path);
-
+        $response = $client->get(env('API_URL') . '?url=' . $path);
 
         return response()->json(['status' => 'success', 'data' => $response->getBody()->getContents()]);
     }
