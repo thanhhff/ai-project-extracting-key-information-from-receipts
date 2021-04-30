@@ -5,7 +5,7 @@
         <h5 class="mb-3">Pages</h5>
         <ul class="menu-link">
           <li><a href="{{route('home')}}" class="">Home</a></li>
-          <li><a href="{{route('test')}}" class="">Test</a></li>
+          <li><a href="{{route('dashboard')}}" class="">Dashboard</a></li>
         </ul>
       </div>
       <div class="col-sm-6 col-lg-2 py-3">

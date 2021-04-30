@@ -4,16 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 
 
-class HomeController
+class HomeController extends BaseController
 {
     public function index() {
         return view('index');
     }
 
-    public function test() {
-        return view('test');
+    public function dashboard() {
+        return view('dashboard.index');
+    }
+
+    public function analysis() {
+        return view('dashboard.analysis');
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect()->route('home');
     }
 
     /**
