@@ -48,8 +48,8 @@
           <p class="or"><span>or</span></p>
 
           <div class="email-login">
-            <input type="email" placeholder="Enter your email" name="email" required>
-            <input type="password" placeholder="Enter your password" name="password" required>
+            <input type="email" class="form-control" placeholder="Enter your email" name="email" required>
+            <input type="password" class="form-control" placeholder="Enter your password" name="password" required>
           </div>
           <button class="cta-btn">Log In</button>
           <a class="forget-pass" href="#">Forgot password?</a>
