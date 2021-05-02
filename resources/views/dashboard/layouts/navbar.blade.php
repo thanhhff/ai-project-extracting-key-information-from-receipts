@@ -4,9 +4,37 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="{{route('dashboard')}}">Dashboard</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Phân tích dữ liệu</li>
-          </ol>
-          <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+            @switch(request()->path())
+              @case("dashboard")
+                </ol>
+                <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+                @break
+              @case("dashboard/bills")
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Danh sách hóa đơn</li>
+                </ol>
+                <h6 class="font-weight-bolder mb-0">Danh sách hóa đơn</h6>
+                @break
+              @case("dashboard/bill/add")
+                <li class="breadcrumb-item text-sm text-dark" aria-current="page">
+                  <a class="opacity-5 text-dark" href="{{route('bills')}}">Danh sách hóa đơn</a></li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Thêm hóa đơn</li>
+                </ol>
+                <h6 class="font-weight-bolder mb-0">Thêm hóa đơn</h6>
+                @break
+              @case("dashboard/bill/1/edit")
+                <li class="breadcrumb-item text-sm text-dark" aria-current="page">
+                  <a class="opacity-5 text-dark" href="{{route('bills')}}">Danh sách hóa đơn</a></li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Sửa hóa đơn</li>
+                </ol>
+                <h6 class="font-weight-bolder mb-0">Sửa hóa đơn</h6>
+                @break
+              @case("dashboard/analysis")
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Test API</li>
+                </ol>
+                <h6 class="font-weight-bolder mb-0">Test API</h6>
+                @break
+              @default   
+            @endswitch
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">

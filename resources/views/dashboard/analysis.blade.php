@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form action="" enctype="multipart/form-data" method="POST">
-                                <img src="{{asset('./assets/img/thumbnail.svg')}}" id="image-preview" width="100%" /><br>
+                                <img src="{{asset('./assets/img/reciept_thumbnail.jpg')}}" id="image-preview" width="100%" /><br>
                                 <input id="image-input" type="file" class="form-control" name="image">
                                 <hr>
                                 <div class="text-body text-sm font-weight-bold text-center icon-move-right">
@@ -96,10 +96,10 @@
                 processData: false,
                 success: function(response){
                     if(response.status === 'success'){
-                    $('#image-input').val("");
-                    showJsonData(JSON.parse(response.data))
+                        $('#image-input').val("");
+                        showJsonData(JSON.parse(response.data))
                     }else{
-                    alert('Fail');
+                        alert('Fail');
                     }
                 },
                 });

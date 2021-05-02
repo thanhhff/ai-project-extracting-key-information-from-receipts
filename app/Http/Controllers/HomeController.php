@@ -17,6 +17,18 @@ class HomeController extends BaseController
         return view('dashboard.index');
     }
 
+    public function bills() {
+        return view('dashboard.bills');
+    }
+
+    public function addBill() {
+        return view('dashboard.add_bill');
+    }
+
+    public function editBill() {
+        return view('dashboard.edit_bill');
+    }
+
     public function analysis() {
         return view('dashboard.analysis');
     }

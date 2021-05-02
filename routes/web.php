@@ -17,6 +17,9 @@ Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
 
 Route::group(['prefix' => 'dashboard', 'middleware'=>['web', 'auth'], 'namespace' => 'App\Http\Controllers'], function() {
     Route::get('/', 'HomeController@dashboard')->name('dashboard');
+    Route::get('/bills', 'HomeController@bills')->name('bills');
+    Route::get('/bill/add', 'HomeController@addBill')->name('bill.add');
+    Route::get('/bill/{id}/edit', 'HomeController@editBill')->name('bill.edit');
     Route::get('/analysis', 'HomeController@analysis')->name('analysis');
     Route::post('/upload', 'HomeController@uploadImage')->name('upload');
     Route::get('/logout', 'HomeController@logout')->name('logout');

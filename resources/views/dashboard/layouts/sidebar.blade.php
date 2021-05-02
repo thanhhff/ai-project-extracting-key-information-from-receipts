@@ -2,7 +2,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute right-0 top-0 d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="{{route('home')}}">
-        <img src="../assets/favicon.png" class="navbar-brand-img h-100 w-15" alt="...">
+        <img src="{{asset('./assets/favicon.png')}}" class="navbar-brand-img h-100 w-15" alt="...">
         <span class="ms-1 font-weight-bold">Manager Systems</span>
       </a>
     </div>
@@ -16,9 +16,16 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link {{request()->is('dashboard/bills') 
+            || request()->is('dashboard/bill/add') || request()->is('dashboard/bill/*/edit') ? 'active' : ''}}" href="{{route('bills')}}">
+            <i class="fa fa-receipt"></i>
+            <span class="nav-link-text ms-1">Danh sách hóa đơn</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link {{request()->is('dashboard/analysis') ? 'active' : ''}}" href="{{route('analysis')}}">
-            <i class="fas fa-brain"></i>
-            <span class="nav-link-text ms-1">Phân tích dữ liệu</span>
+            <i class="fas fa-paperclip"></i>
+            <span class="nav-link-text ms-1">Test api</span>
           </a>
         </li>
       </ul>
