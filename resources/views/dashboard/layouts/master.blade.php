@@ -33,7 +33,6 @@
   <link rel="stylesheet" href="{{asset('./assets/css/toastr.min.css')}}">
   <script src="{{asset('./assets/js/sweetalert2.min.js')}}"></script>
   <script src="{{asset('./assets/js/toastr.min.js')}}"></script>
-
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
