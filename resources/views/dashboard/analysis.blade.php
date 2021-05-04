@@ -39,15 +39,15 @@
         </div>
     </div>
 
-    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-hidden="true" data-toggle="modal">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade" id="loadingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
-            <div class="modal-body">
-                <div class="row justify-content-center text-center">
-                <div class="loadingspinner m-3"></div>
-                <p class="mt-4">Processing may take a few minutes. Please wait!</p>
+                <div class="modal-body">
+                    <div class="row justify-content-center text-center">
+                        <div class="loadingspinner m-3"></div>
+                        <p class="mt-4">Processing may take a few minutes. Please wait!</p>
+                    </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>
@@ -66,11 +66,16 @@
 
         $("#image-input").change(function(){readURL(this)})
 
+        let loadingModal = new bootstrap.Modal(document.getElementById('loadingModal'), {
+            keyboard: false,
+            backdrop: "static"
+        })
+
         $(document).ajaxStart(function(){
-            $('#loadingModal').modal({backdrop: 'static', show: true})
+            loadingModal.show()
         }).ajaxStop(function(){
             setTimeout(() => {
-                $('#loadingModal').modal('hide')
+                loadingModal.hide()
             }, 1000);
         });
 
