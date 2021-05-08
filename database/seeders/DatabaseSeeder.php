@@ -13,6 +13,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \DB::table('categories')->insert([
+            [
+                'name' => "Ăn uống",
+                'descriptions' => ''
+            ],
+            [
+                'name' => "Mua sắm",
+                'descriptions' => ''
+            ],
+            [
+                'name' => "Di chuyển",
+                'descriptions' => ''
+            ],
+            [
+                'name' => "Điện nước mạng",
+                'descriptions' => ''
+            ],
+            [
+                'name' => "Giải trí",
+                'descriptions' => ''
+            ],
+            [
+                'name' => "Khác",
+                'descriptions' => ''
+            ]
+        ]);
     }
 }

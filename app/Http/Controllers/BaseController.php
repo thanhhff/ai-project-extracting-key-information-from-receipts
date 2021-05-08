@@ -9,12 +9,13 @@ use Modules\Web\Services\CartService;
 
 class BaseController extends Controller
 {
+    public $user;
     public function __construct()
     {
         $this->middleware(function ($request, $next) {
-            $user = Auth::user();
-            if(!empty($user)){
-                View::share('user', $user);
+            $this->user = Auth::user();
+            if(!empty($this->user)){
+                View::share('user', $this->user );
             }
             return $next($request);
         });

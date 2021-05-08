@@ -9,7 +9,7 @@
               <div class="numbers">
                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Chi tiêu trong tháng</p>
                 <h5 class="font-weight-bolder mb-0">
-                  53,000 vnd<br>
+                  {{\App\Helpers\format_currency($totalAmountInMonths)}}<br>
                   <span class="text-success text-sm font-weight-bolder">+55%</span>
                 </h5>
               </div>
@@ -29,9 +29,9 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Số hóa đơn</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Hóa đơn tháng này</p>
                 <h5 class="font-weight-bolder mb-0">
-                  100<br>
+                  {{$numOfBills}}<br>
                   <span class="text-success text-sm font-weight-bolder">+3%</span>
                 </h5>
               </div>
@@ -51,10 +51,9 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Số hóa đơn</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng số hóa đơn</p>
                 <h5 class="font-weight-bolder mb-0">
-                  100<br>
-                  <span class="text-success text-sm font-weight-bolder">+3%</span>
+                  {{$totalAmounts}}<br>
                 </h5>
               </div>
             </div>
@@ -75,69 +74,64 @@
           <h6>Thanh toán gần đây</h6>
         </div>
         <div class="card-body p-3">
-          <div class="timeline timeline-one-side">
-            <div class="timeline-block mb-3">
-              <span class="timeline-step">
-                <i class="ni ni-bell-55 text-success text-gradient"></i>
-              </span>
-              <div class="timeline-content">
-                <h6 class="text-dark text-sm font-weight-bold mb-0">$2400, Design changes</h6>
-                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">22 DEC 7:20 PM</p>
+            @if(count($recentBills) <= 0)
+              <div class="text-center m-4">
+                <h6 style="color: red">Chưa có dữ liệu người dùng</h6>
               </div>
+            @else
+            <div class="timeline timeline-one-side">
+              @foreach($recentBills as $bill)
+                <div class="timeline-block mb-3">
+                  <span class="timeline-step">
+                    @switch($bill['category_id'])
+                      @case(1)
+                        <i class="fa fa-cutlery text-warning text-gradient"></i>
+                        @break
+                      @case(2)
+                        <i class="ni ni-cart text-dark text-gradient"></i>
+                        @break
+                      @case(3)
+                        <i class="fa fa-taxi text-danger text-gradient"></i>
+                        @break
+                      @case(4)
+                        <i class="ni ni-atom text-dark text-gradient"></i>
+                        @break
+                      @case(5)
+                        <i class="fa fa-gamepad text-primary text-gradient"></i>
+                        @break
+                      @default
+                        <i class="ni ni-money-coins text-info text-gradient"></i>
+                        @break
+                    @endswitch
+                  </span>
+                  <div class="timeline-content">
+                    <a href="{{route('bill.edit', $bill['id'])}}" class="text-success text-sm font-weight-bold mb-0">
+                      #{{$bill['id']}} &nbsp; &nbsp;&nbsp;
+                    </a>
+                    <span class="text-dark text-sm font-weight-bold mb-0">{{\App\Helpers\format_currency($bill['total'])}}</span>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{\App\Helpers\format_date($bill['payment_date'])}}</p>
+                  </div>
+                </div>
+              @endforeach
             </div>
-            <div class="timeline-block mb-3">
-              <span class="timeline-step">
-                <i class="ni ni-html5 text-danger text-gradient"></i>
-              </span>
-              <div class="timeline-content">
-                <h6 class="text-dark text-sm font-weight-bold mb-0">New order #1832412</h6>
-                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 11 PM</p>
-              </div>
-            </div>
-            <div class="timeline-block mb-3">
-              <span class="timeline-step">
-                <i class="ni ni-cart text-info text-gradient"></i>
-              </span>
-              <div class="timeline-content">
-                <h6 class="text-dark text-sm font-weight-bold mb-0">Server payments for April</h6>
-                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">21 DEC 9:34 PM</p>
-              </div>
-            </div>
-            <div class="timeline-block mb-3">
-              <span class="timeline-step">
-                <i class="ni ni-credit-card text-warning text-gradient"></i>
-              </span>
-              <div class="timeline-content">
-                <h6 class="text-dark text-sm font-weight-bold mb-0">New card added for order #4395133</h6>
-                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">20 DEC 2:20 AM</p>
-              </div>
-            </div>
-            <div class="timeline-block mb-3">
-              <span class="timeline-step">
-                <i class="ni ni-key-25 text-primary text-gradient"></i>
-              </span>
-              <div class="timeline-content">
-                <h6 class="text-dark text-sm font-weight-bold mb-0">Unlock packages for development</h6>
-                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">18 DEC 4:54 AM</p>
-              </div>
-            </div>
-            <div class="timeline-block">
-              <span class="timeline-step">
-                <i class="ni ni-money-coins text-dark text-gradient"></i>
-              </span>
-              <div class="timeline-content">
-                <h6 class="text-dark text-sm font-weight-bold mb-0">New order #9583120</h6>
-                <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">17 DEC</p>
-              </div>
-            </div>
-          </div>
+            @endif
         </div>
       </div>
     </div>
     <div class="col-lg-7">
+      <div class="card mb-3">
+        <div class="card-header pb-0">
+          <h6>Phân bố chi phí </h6>
+        </div>
+        <div class="card-body p-3">
+          <div class="chart">
+            <canvas id="chart-pie" class="chart-canvas" height="150px"></canvas>
+          </div>
+        </div>
+      </div>
       <div class="card">
         <div class="card-header pb-0">
-          <h6>Sales overview</h6>
+          <h6>Thanh toán trong năm</h6>
           <p class="text-sm">
             <i class="fa fa-arrow-up text-success"></i>
             <span class="font-weight-bold">4% more</span> in 2021
@@ -149,37 +143,43 @@
           </div>
         </div>
       </div>
-      <div class="card mt-3">
-        <div class="card-header pb-0">
-          <h6>Analysis</h6>
-        </div>
-        <div class="card-body p-3">
-          <div class="chart">
-            <canvas id="chart-pie" class="chart-canvas" height="150px"></canvas>
-          </div>
-        </div>
-      </div>
+      
     </div>
   </div>
 
     <script>
+
+    const groupAmountByCategories = (object) => {
+      let data = [];
+      for (const key in object) {
+        data.push(object[key].reduce((accumulator, i) => {return accumulator + i['total']}, 0))
+      }
+      return data;
+    }
+
+    const categories = {!! json_encode($categories) !!};
+    categorieLabels = categories.map(item => item.name)
+    const billGrCategory  = {!! json_encode($billGrCategory) !!};
+    const data1 = groupAmountByCategories(billGrCategory)
+    
+    
     var ctx = document.getElementById("chart-pie").getContext("2d");
 
     new Chart(ctx, {
       type: "pie",
       data: {
-        labels: ["Drink", "Food", "Shopping", "Other"],
+        labels: categorieLabels,
         datasets: [{
           label: 'Chi phí',
-          data: [20, 40, 35, 5],
-          backgroundColor: ['red', 'blue', 'green', 'yellow'],
+          data: data1,
+          backgroundColor: ['#1e3d58', '#f5f0e1', '#ff6e40', '#ffc13b', '#1e847f', '#1868ae'],
         }]
       },
       options: {
         responsive: true,
         plugins: {
           legend: {
-            position: 'top',
+            position: 'bottom',
           },
           title: {
             display: true,
@@ -209,7 +209,7 @@
       data: {
         labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [{
-            label: "Mobile apps",
+            label: "Số tiền thanh toán",
             tension: 0.4,
             borderWidth: 0,
             pointRadius: 0,
@@ -219,19 +219,7 @@
             data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
             maxBarThickness: 6
 
-          },
-          {
-            label: "Websites",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#3A416F",
-            borderWidth: 3,
-            backgroundColor: gradientStroke2,
-            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-            maxBarThickness: 6
-
-          },
+          }
         ],
       },
       options: {

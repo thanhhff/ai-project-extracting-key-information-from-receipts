@@ -21,19 +21,20 @@
                 </ol>
                 <h6 class="font-weight-bolder mb-0">Thêm hóa đơn</h6>
                 @break
-              @case("dashboard/bill/1/edit")
-                <li class="breadcrumb-item text-sm text-dark" aria-current="page">
-                  <a class="opacity-5 text-dark" href="{{route('bills')}}">Danh sách hóa đơn</a></li>
-                <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Sửa hóa đơn</li>
-                </ol>
-                <h6 class="font-weight-bolder mb-0">Sửa hóa đơn</h6>
-                @break
               @case("dashboard/analysis")
                 <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Test API</li>
                 </ol>
                 <h6 class="font-weight-bolder mb-0">Test API</h6>
                 @break
               @default   
+                @if(strpos(request()->path(), 'edit') !== false)
+                  <li class="breadcrumb-item text-sm text-dark" aria-current="page">
+                    <a class="opacity-5 text-dark" href="{{route('bills')}}">Danh sách hóa đơn</a></li>
+                  <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Sửa hóa đơn</li>
+                  </ol>
+                  <h6 class="font-weight-bolder mb-0">Sửa hóa đơn</h6>
+                @endif
+                @break
             @endswitch
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
