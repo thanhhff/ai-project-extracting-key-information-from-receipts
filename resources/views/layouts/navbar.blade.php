@@ -16,9 +16,11 @@
         <li class="nav-item">
           <a class="nav-link {{request()->is('/') ? 'active' : ''}}" href="{{route('home')}}">Home</a>
         </li>
+        @if(!empty($user))
         <li class="nav-item">
           <a class="nav-link {{request()->is('dashboard') ? 'active' : ''}}" href="{{route('dashboard')}}">Dashboard</a>
         </li>
+        @endif
       </ul>
       @if(empty($user))
       <div class="ml-auto my-2 my-lg-0">
