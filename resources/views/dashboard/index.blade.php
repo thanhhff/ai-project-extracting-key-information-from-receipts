@@ -10,7 +10,7 @@
                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Chi tiêu trong tháng</p>
                 <h5 class="font-weight-bolder mb-0">
                   {{\App\Helpers\format_currency($totalAmountInMonths)}}<br>
-                  <span class="text-success text-sm font-weight-bolder">+55%</span>
+                  <!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
                 </h5>
               </div>
             </div>
@@ -32,7 +32,7 @@
                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Hóa đơn tháng này</p>
                 <h5 class="font-weight-bolder mb-0">
                   {{$numOfBills}}<br>
-                  <span class="text-success text-sm font-weight-bolder">+3%</span>
+                  <!-- <span class="text-success text-sm font-weight-bolder">+3%</span> -->
                 </h5>
               </div>
             </div>

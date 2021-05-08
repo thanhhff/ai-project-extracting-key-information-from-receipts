@@ -51,8 +51,21 @@ class AnalysisImage implements ShouldQueue
     }
 
     private function _convertDate($date) {
-        [$day, $month, $year] = explode("/", $date);
-        return $year . "-" . $month . "-" . $day; 
+        try {
+            $separate = "/";
+            if (strpos($date, '-') !== false) {
+                $separate = "-";
+            } else if (strpos($date, '.') !== false) {
+                $separate = ".";
+            }
+            [$day, $month, $year] = explode($separate, $date);
+            if($month > 12) {
+                [$day, $month] = [$month, $day];
+            }
+            return $year . "-" . $month . "-" . $day; 
+        } catch (Exception $e) {
+            return date("Y-m-d");
+        }
     }
 
     public function failed($exception) {
