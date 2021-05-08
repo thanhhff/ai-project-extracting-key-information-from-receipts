@@ -35,9 +35,8 @@ class HomeController extends BaseController
         $categories = Category::all();
 
         $totalBills = Bill::whereUserId($this->user->id)->get();
-        $totalAmounts = collect($totalBills)->sum('total');
         $billGrCategory = collect($totalBills)->groupBy('category_id')->sortKeys();
-        return view('dashboard.index', compact('totalAmountInMonths', 'numOfBills', 'totalAmounts', 'recentBills', 'categories', 'billGrCategory'));
+        return view('dashboard.index', compact('totalAmountInMonths', 'numOfBills', 'totalBills', 'recentBills', 'categories', 'billGrCategory'));
     }
 
     public function bills() {

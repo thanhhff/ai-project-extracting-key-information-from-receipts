@@ -53,7 +53,7 @@
               <div class="numbers">
                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng số hóa đơn</p>
                 <h5 class="font-weight-bolder mb-0">
-                  {{$totalAmounts}}<br>
+                  {{count($totalBills)}}<br>
                 </h5>
               </div>
             </div>
@@ -124,9 +124,15 @@
           <h6>Phân bố chi phí </h6>
         </div>
         <div class="card-body p-3">
+          @if(count($totalBills) <= 0)
+            <div class="text-center m-4">
+              <h6 style="color: red">Chưa có dữ liệu người dùng</h6>
+            </div>
+          @else
           <div class="chart">
             <canvas id="chart-pie" class="chart-canvas" height="150px"></canvas>
           </div>
+          @endif
         </div>
       </div>
       <div class="card">
@@ -138,9 +144,15 @@
           </p>
         </div>
         <div class="card-body p-3">
+          @if(count($totalBills) <= 0)
+            <div class="text-center m-4">
+              <h6 style="color: red">Chưa có dữ liệu người dùng</h6>
+            </div>
+          @else
           <div class="chart">
             <canvas id="chart-line" class="chart-canvas" height="300px"></canvas>
           </div>
+          @endif
         </div>
       </div>
       
@@ -165,113 +177,120 @@
     
     var ctx = document.getElementById("chart-pie").getContext("2d");
 
-    new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: categorieLabels,
-        datasets: [{
-          label: 'Chi phí',
-          data: data1,
-          backgroundColor: ['#1e3d58', '#f5f0e1', '#ff6e40', '#ffc13b', '#1e847f', '#1868ae'],
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'bottom',
-          },
-          title: {
-            display: true,
-            text: 'Các loại chi phí'
+    if(ctx) {
+      new Chart(ctx, {
+        type: "pie",
+        data: {
+          labels: categorieLabels,
+          datasets: [{
+            label: 'Chi phí',
+            data: data1,
+            backgroundColor: ['#1e3d58', '#f5f0e1', '#ff6e40', '#ffc13b', '#1e847f', '#1868ae'],
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom',
+            },
+            title: {
+              display: true,
+              text: 'Các loại chi phí'
+            }
           }
-        }
-      },
-    });
+        },
+      });
+    }
+
+    
 
     var ctx2 = document.getElementById("chart-line").getContext("2d");
 
-    var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+    if(ctx2) {
+      var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
 
-    gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); 
+      gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+      gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+      gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); 
 
-    var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
+      var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
 
-    gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-    gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-    gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); 
+      gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+      gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+      gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); 
 
 
-    new Chart(ctx2, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-            label: "Số tiền thanh toán",
-            tension: 0.4,
-            borderWidth: 0,
-            pointRadius: 0,
-            borderColor: "#cb0c9f",
-            borderWidth: 3,
-            backgroundColor: gradientStroke1,
-            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-            maxBarThickness: 6
+      new Chart(ctx2, {
+        type: "line",
+        data: {
+          labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          datasets: [{
+              label: "Số tiền thanh toán",
+              tension: 0.4,
+              borderWidth: 0,
+              pointRadius: 0,
+              borderColor: "#cb0c9f",
+              borderWidth: 3,
+              backgroundColor: gradientStroke1,
+              data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+              maxBarThickness: 6
 
-          }
-        ],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-          display: false,
+            }
+          ],
         },
-        tooltips: {
-          enabled: true,
-          mode: "index",
-          intersect: false,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          legend: {
+            display: false,
+          },
+          tooltips: {
+            enabled: true,
+            mode: "index",
+            intersect: false,
+          },
+          scales: {
+            yAxes: [{
+              gridLines: {
+                borderDash: [2],
+                borderDashOffset: [2],
+                color: '#dee2e6',
+                zeroLineColor: '#dee2e6',
+                zeroLineWidth: 1,
+                zeroLineBorderDash: [2],
+                drawBorder: false,
+              },
+              ticks: {
+                suggestedMin: 0,
+                suggestedMax: 500,
+                beginAtZero: true,
+                padding: 10,
+                fontSize: 11,
+                fontColor: '#adb5bd',
+                lineHeight: 3,
+                fontStyle: 'normal',
+                fontFamily: "Open Sans",
+              },
+            }, ],
+            xAxes: [{
+              gridLines: {
+                zeroLineColor: 'rgba(0,0,0,0)',
+                display: false,
+              },
+              ticks: {
+                padding: 10,
+                fontSize: 11,
+                fontColor: '#adb5bd',
+                lineHeight: 3,
+                fontStyle: 'normal',
+                fontFamily: "Open Sans",
+              },
+            }, ],
+          },
         },
-        scales: {
-          yAxes: [{
-            gridLines: {
-              borderDash: [2],
-              borderDashOffset: [2],
-              color: '#dee2e6',
-              zeroLineColor: '#dee2e6',
-              zeroLineWidth: 1,
-              zeroLineBorderDash: [2],
-              drawBorder: false,
-            },
-            ticks: {
-              suggestedMin: 0,
-              suggestedMax: 500,
-              beginAtZero: true,
-              padding: 10,
-              fontSize: 11,
-              fontColor: '#adb5bd',
-              lineHeight: 3,
-              fontStyle: 'normal',
-              fontFamily: "Open Sans",
-            },
-          }, ],
-          xAxes: [{
-            gridLines: {
-              zeroLineColor: 'rgba(0,0,0,0)',
-              display: false,
-            },
-            ticks: {
-              padding: 10,
-              fontSize: 11,
-              fontColor: '#adb5bd',
-              lineHeight: 3,
-              fontStyle: 'normal',
-              fontFamily: "Open Sans",
-            },
-          }, ],
-        },
-      },
-    });
+      });
+    }
+    
   </script>
 @endsection
