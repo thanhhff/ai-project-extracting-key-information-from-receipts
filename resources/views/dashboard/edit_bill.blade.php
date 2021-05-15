@@ -4,17 +4,17 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Xác nhận</h5>
+          <h5 class="modal-title">{{ __('index.confirm') }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>Bạn chắc chắn muốn xóa hóa đơn này !</p>
+          <p>{{ __('index.delete_alert') }}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('index.close') }}</button>
           <form method="POST" action="{{route('bill.delete', $bill->id)}}">
             @csrf
-            <button type="submit" class="btn bg-gradient-danger">Xóa</button>
+            <button type="submit" class="btn bg-gradient-danger">{{ __('index.reciept_delete') }}</button>
           </form>
           
         </div>
@@ -34,28 +34,28 @@
             <div class="col-lg-8">
                 <form action="{{route('bill.update', $bill->id)}}" method="POST">
                     @csrf
-                    <label>Mã hóa đơn</label>
+                    <label>{{ __('index.rpt_reciept_no') }}</label>
                     <input type="text" class="form-control" value="{{'#' . $bill->id}}" disabled>
-                    <label>Loại chi phí</label>
+                    <label>{{ __('index.rpt_type') }}</label>
                     <select name="category_id" class="form-control custom-select">
                       @foreach($categories as $category)
                       <option value="{{$category->id}}" @if($category->id == $bill->category_id) selected @endif>{{$category->name}}</option>
                       @endforeach
                     </select>
-                    <label>Tổng tiền</label>
+                    <label>{{ __('index.rpt_total') }}</label>
                     <input type="text" class="form-control" name="total" value="{{$bill->total}}">
-                    <label>Ngày thanh toán</label>
+                    <label>{{ __('index.rpt_payment_date') }}</label>
                     <input type="date" class="form-control" name="payment_date" value="{{$bill->payment_date}}">
-                    <label>Cửa hàng</label> 
+                    <label>{{ __('index.rpt_seller') }}</label> 
                     <input type="text" class="form-control" name="seller" value="{{$bill->seller}}">
-                    <label>Địa chỉ</label>
+                    <label>{{ __('index.rpt_address') }}</label>
                     <textarea name="address" class="form-control" rows="4">{{$bill->address}}</textarea>
-                    <label>Ghi chú</label>
+                    <label>{{ __('index.rpt_note') }}</label>
                     <textarea name="note" class="form-control" rows="4">{{$bill->note}}</textarea>
                     <hr>
                     <div class="text-body text-sm font-weight-bold text-center">
-                        <a class="btn bg-gradient-danger mb-0" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">Xóa</a>
-                        <button type="submit" class="btn bg-gradient-dark mb-0">Cập nhật</button>
+                        <a class="btn bg-gradient-danger mb-0" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">{{ __('index.reciept_delete') }}</a>
+                        <button type="submit" class="btn bg-gradient-dark mb-0">{{ __('index.reciept_update') }}</button>
                     </div>
                 </form>
             </div>

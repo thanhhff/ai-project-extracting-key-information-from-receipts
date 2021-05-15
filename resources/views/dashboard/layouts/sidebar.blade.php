@@ -12,20 +12,20 @@
         <li class="nav-item">
           <a class="nav-link {{request()->is('dashboard') ? 'active' : ''}}" href="{{route('dashboard')}}">
             <i class="fas fa-chart-pie"></i>
-            <span class="nav-link-text ms-1">Dashboard</span>
+            <span class="nav-link-text ms-1">{{ __('index.dashboard') }}</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link {{request()->is('dashboard/bills') 
             || request()->is('dashboard/bill/add') || request()->is('dashboard/bill/*/edit') ? 'active' : ''}}" href="{{route('bills')}}">
             <i class="fa fa-receipt"></i>
-            <span class="nav-link-text ms-1">Danh sách hóa đơn</span>
+            <span class="nav-link-text ms-1">{{ __('index.nav_reciepts') }}</span>
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link {{request()->is('dashboard/analysis') ? 'active' : ''}}" href="{{route('analysis')}}">
             <i class="fas fa-paperclip"></i>
-            <span class="nav-link-text ms-1">Test api</span>
+            <span class="nav-link-text ms-1">{{ __('index.nav_test') }}</span>
           </a>
         </li>
       </ul>

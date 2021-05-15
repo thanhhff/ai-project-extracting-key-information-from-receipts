@@ -5,7 +5,7 @@ if (!function_exists('format_currency')) {
 
     function format_currency($amount)
     {
-        if(empty($amount)) return "";
+        if(empty($amount)) return "0 VND";
         $result = is_numeric($amount) ? number_format($amount) : $amount;
         $result .= " VND";
         return $result;

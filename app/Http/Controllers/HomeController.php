@@ -10,6 +10,7 @@ use App\Models\Image;
 use App\Models\Bill;
 use Illuminate\Support\Str;
 use App\Jobs\AnalysisImage;
+use App;
 
 
 class HomeController extends BaseController
@@ -25,18 +26,36 @@ class HomeController extends BaseController
         return view('index');
     }
 
+    public function changeLanguage($language) {
+        App::setlocale($language);
+        session()->put('locale', $language);
+        return redirect()->back();
+    }
+
     public function dashboard() {
         $billInMonths = Bill::whereUserId($this->user->id)
                             ->whereMonth('payment_date', date('m'))
-                            ->whereYear('payment_date', date('Y'))->orderBy('payment_date', 'desc')->get();
+                            ->whereYear('payment_date', date('Y'))->orderBy('created_at', 'desc')->get();
+        $billInPrevMonth = Bill::whereUserId($this->user->id)
+                            ->whereMonth('payment_date', date('m') - 1)
+                            ->whereYear('payment_date', date('Y'))->orderBy('created_at', 'desc')->get();
+
         $totalAmountInMonths = collect($billInMonths)->sum('total');
+        $totalAmountInPrevMonths = collect($billInPrevMonth)->sum('total');
+        $amountDiff = $totalAmountInMonths ? round(100 * ($totalAmountInMonths - $totalAmountInPrevMonths) / $totalAmountInMonths, 2) : 0;
+        
         $numOfBills = count($billInMonths);
+        $billDiff = $numOfBills ? round(100 * ($numOfBills - count($billInPrevMonth)) / $numOfBills, 1) : 0;
+
         $recentBills = array_slice($billInMonths->toArray(), 0, 10);
         $categories = Category::all();
 
         $totalBills = Bill::whereUserId($this->user->id)->get();
         $billGrCategory = collect($totalBills)->groupBy('category_id')->sortKeys();
-        return view('dashboard.index', compact('totalAmountInMonths', 'numOfBills', 'totalBills', 'recentBills', 'categories', 'billGrCategory'));
+
+        return view('dashboard.index', compact('totalAmountInMonths', 'numOfBills', 
+                                'totalBills', 'recentBills', 'categories', 'billGrCategory',
+                                'amountDiff', 'billDiff'));
     }
 
     public function bills() {

@@ -13,19 +13,19 @@
                 <div class="col-lg-8">
                     <form action="{{route('bill.create')}}" enctype="multipart/form-data" method="POST">
                       @csrf
-                      <label>Hóa đơn</label>
+                      <label>{{ __('index.rpt_reciept') }}</label>
                       <input id="image-input" type="file" class="form-control" name="image">
-                      <label>Loại chi phí</label>
+                      <label>{{ __('index.rpt_type') }}</label>
                       <select name="category_id" class="form-control custom-select">
                           @foreach($categories as $category)
                           <option value="{{$category->id}}">{{$category->name}}</option>
                           @endforeach
                       </select>
-                      <label>Ghi chú</label>
+                      <label>{{ __('index.rpt_note') }}</label>
                       <textarea name="note" class="form-control" rows="4"></textarea>
                       <hr>
                       <div class="text-body text-sm font-weight-bold text-center">
-                          <button type="submit" class="btn bg-gradient-dark mb-0" id="upload-image">Thêm</button>
+                          <button type="submit" class="btn bg-gradient-dark mb-0" id="upload-image">{{ __('index.reciept_add') }}</button>
                       </div>
                     </form>
                 </div>

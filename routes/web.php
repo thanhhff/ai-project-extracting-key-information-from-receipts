@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
+Route::get('change-language/{language}', 'App\Http\Controllers\HomeController@changeLanguage')->name('language');
 
 Route::group(['prefix' => 'dashboard', 'middleware'=>['web', 'auth'], 'namespace' => 'App\Http\Controllers'], function() {
     Route::get('/', 'HomeController@dashboard')->name('dashboard');

@@ -6,7 +6,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title pt-1" id="exampleModalLabel">Thông tin chi tiết</h5>
+                    <h5 class="modal-title pt-1" id="exampleModalLabel">{{ __('index.rpts_detail') }}</h5>
                     <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                         <i class="fa fa-times fa-lg"></i>
                     </button>
@@ -19,28 +19,28 @@
                         <div class="col-7">
                             <ul class="list-group">
                                 <li class="list-group-item border-0 pt-0 text-sm"><strong class="text-dark">
-                                    Mã hóa đơn:</strong> &nbsp;#<span id="id"></span>
+                                    {{ __('index.rpt_reciept_no') }}:</strong> &nbsp;#<span id="id"></span>
                                 </li>
                                 <li class="list-group-item border-0 pt-0 text-sm"><strong class="text-dark">
-                                    Loại:</strong> &nbsp; <span id="category"></span>
+                                    {{ __('index.rpt_type') }}:</strong> &nbsp; <span id="category"></span>
                                 </li>
                                 <li class="list-group-item border-0 pt-0 text-sm"><strong class="text-dark">
-                                    Tổng tiền:</strong> &nbsp; <span id="total"></span>
+                                    {{ __('index.rpt_total') }}:</strong> &nbsp; <span id="total"></span>
                                 </li>
                                 <li class="list-group-item border-0 pt-0 text-sm"><strong class="text-dark">
-                                    Ngày thanh toán:</strong> &nbsp; <span id="payment_date"></span>
+                                    {{ __('index.rpt_payment_date') }}:</strong> &nbsp; <span id="payment_date"></span>
                                 </li>
                                 <li class="list-group-item border-0 pt-0 text-sm"><strong class="text-dark">
-                                    Cửa hàng:</strong> &nbsp; <span id="seller"></span>
+                                    {{ __('index.rpt_seller') }}:</strong> &nbsp; <span id="seller"></span>
                                 </li>
                                 <li class="list-group-item border-0 pt-0 text-sm"><strong class="text-dark">
-                                    Địa chỉ:</strong> &nbsp; <span id="address"></span>
+                                    {{ __('index.rpt_address') }}:</strong> &nbsp; <span id="address"></span>
                                 </li>
                                 <li class="list-group-item border-0 pt-0 text-sm"><strong class="text-dark">
-                                    Ghi chú:</strong> &nbsp; <span id="note"></span>
+                                    {{ __('index.rpt_note') }}:</strong> &nbsp; <span id="note"></span>
                                 </li>
                                 <li class="list-group-item border-0 pt-0 text-sm"><strong class="text-dark">
-                                    Thời gian upload:</strong> &nbsp; <span id="created_at"></span>
+                                    {{ __('index.rpt_uploaded_at') }}:</strong> &nbsp; <span id="created_at"></span>
                                 </li>
                             </ul>  
                         </div>
@@ -56,7 +56,7 @@
                 <div class="card-header pb-0 px-3">
                     <div class="row">
                         <div class="col-md-8">
-                            <h5 class="mb-0 pt-1">Các hóa đơn đã thanh toán</h6>
+                            <h5 class="mb-0 pt-1">{{ __('index.rpts_paid_reciepts') }}</h6>
                         </div>
                         <div class="col-md-4 d-flex justify-content-end align-items-center">
                             <a class="btn bg-gradient-light mb-0" style="margin-right: 10px" href="{{route('bill.new')}}">
@@ -70,17 +70,17 @@
                     <div class="table-responsive p-0">
                     @if(count($bills) <= 0)
                     <div class="text-center m-4">
-                        <h6 style="color: red">Chưa có dữ liệu người dùng</h6>
+                        <h6 style="color: red">{{ __('index.no_data') }}</h6>
                     </div>
                     @else 
                     <table class="table align-items-center mb-0">
                         <thead>
                             <tr>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center" width="15%">Trạng thái</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center" width="15%">Hóa đơn</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center" width="15%">Loại</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center" width="15%">Tổng tiền</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center" width="20%">Ngày thanh toán</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center" width="15%">{{ __('index.rpt_status') }}</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center" width="15%">{{ __('index.rpt_reciept') }}</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center" width="15%">{{ __('index.rpt_type') }}</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center" width="15%">{{ __('index.rpt_total') }}</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center" width="20%">{{ __('index.rpt_payment_date') }}</th>
                                 <th class="text-secondary opacity-7" width="20%"></th>
                             </tr>
                         </thead>
@@ -89,11 +89,11 @@
                             <tr>
                                 <td class="align-middle text-center text-sm">
                                     @if($bill->status == 1)
-                                        <span class="badge badge-sm bg-gradient-warning">Đang xử lý</span>
+                                        <span class="badge badge-sm bg-gradient-warning">{{ __('index.processing') }}</span>
                                     @elseif($bill->status == 2)
-                                        <span class="badge badge-sm bg-gradient-success">Thành công </span>
+                                        <span class="badge badge-sm bg-gradient-success">{{ __('index.success') }}</span>
                                     @elseif($bill->status == 3)
-                                        <span class="badge badge-sm bg-gradient-danger">Lỗi</span>
+                                        <span class="badge badge-sm bg-gradient-danger">{{ __('index.error') }}</span>
                                     @endif
                                 </td>
                                 <td>
@@ -118,10 +118,10 @@
                                 <td class="align-middle">
                                     <div class="ms-auto">
                                         <a class="btn btn-link text-dark px-2 mb-0" data-bs-toggle="modal" data-bs-target="#detailModal" onclick="showDetail({{$bill->id}})">
-                                            <i class="far fa-eye me-2"></i>View
+                                            <i class="far fa-eye me-2"></i>{{ __('index.rpt_view') }}
                                         </a>
                                         <a class="btn btn-link text-dark px-2 mb-0" href="{{route('bill.edit', $bill->id)}}">
-                                            <i class="fas fa-pencil-alt text-dark me-2"></i>Edit
+                                            <i class="fas fa-pencil-alt text-dark me-2"></i>{{ __('index.rpt_edit') }}
                                         </a>
                                     </div>
                                 </td>

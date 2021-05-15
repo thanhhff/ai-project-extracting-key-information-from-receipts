@@ -7,10 +7,16 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Chi tiêu trong tháng</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">{{ __('index.dash_amount_in_month') }}</p>
                 <h5 class="font-weight-bolder mb-0">
                   {{\App\Helpers\format_currency($totalAmountInMonths)}}<br>
-                  <!-- <span class="text-success text-sm font-weight-bolder">+55%</span> -->
+                  @if($amountDiff >= 0)
+                    @if($amountDiff != 0)
+                    <span class="text-success text-sm font-weight-bolder">+{{$amountDiff}}%</span>
+                    @endif
+                  @else 
+                    <span class="text-danger text-sm font-weight-bolder">-{{abs($amountDiff)}}%</span>
+                  @endif
                 </h5>
               </div>
             </div>
@@ -29,10 +35,16 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Hóa đơn tháng này</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">{{ __('index.dash_bill_in_month') }}</p>
                 <h5 class="font-weight-bolder mb-0">
                   {{$numOfBills}}<br>
-                  <!-- <span class="text-success text-sm font-weight-bolder">+3%</span> -->
+                  @if($billDiff >= 0)
+                    @if($billDiff != 0)
+                    <span class="text-success text-sm font-weight-bolder">+{{$billDiff}}%</span>
+                    @endif
+                  @else 
+                    <span class="text-danger text-sm font-weight-bolder">-{{abs($billDiff)}}%</span>
+                  @endif
                 </h5>
               </div>
             </div>
@@ -51,7 +63,7 @@
           <div class="row">
             <div class="col-8">
               <div class="numbers">
-                <p class="text-sm mb-0 text-capitalize font-weight-bold">Tổng số hóa đơn</p>
+                <p class="text-sm mb-0 text-capitalize font-weight-bold">{{ __('index.dash_total_bill') }}</p>
                 <h5 class="font-weight-bolder mb-0">
                   {{count($totalBills)}}<br>
                 </h5>
@@ -71,12 +83,12 @@
     <div class="col-lg-5 mb-lg-0 mb-4">
       <div class="card h-100">
         <div class="card-header pb-0">
-          <h6>Thanh toán gần đây</h6>
+          <h6>{{ __('index.dash_recent_payments') }}</h6>
         </div>
         <div class="card-body p-3">
             @if(count($recentBills) <= 0)
               <div class="text-center m-4">
-                <h6 style="color: red">Chưa có dữ liệu người dùng</h6>
+                <h6 style="color: red">{{ __('index.no_data') }}</h6>
               </div>
             @else
             <div class="timeline timeline-one-side">
@@ -121,12 +133,12 @@
     <div class="col-lg-7">
       <div class="card mb-3">
         <div class="card-header pb-0">
-          <h6>Phân bố chi phí </h6>
+          <h6>{{ __('index.dash_cost_analysis') }}</h6>
         </div>
         <div class="card-body p-3">
           @if(count($totalBills) <= 0)
             <div class="text-center m-4">
-              <h6 style="color: red">Chưa có dữ liệu người dùng</h6>
+              <h6 style="color: red">{{ __('index.no_data') }}</h6>
             </div>
           @else
           <div class="chart">
@@ -137,16 +149,12 @@
       </div>
       <div class="card">
         <div class="card-header pb-0">
-          <h6>Thanh toán trong năm</h6>
-          <p class="text-sm">
-            <i class="fa fa-arrow-up text-success"></i>
-            <span class="font-weight-bold">4% more</span> in 2021
-          </p>
+          <h6>{{ __('index.dash_monthly_follow') }}</h6>
         </div>
         <div class="card-body p-3">
           @if(count($totalBills) <= 0)
             <div class="text-center m-4">
-              <h6 style="color: red">Chưa có dữ liệu người dùng</h6>
+              <h6 style="color: red">{{ __('index.no_data') }}</h6>
             </div>
           @else
           <div class="chart">

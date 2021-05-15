@@ -4,7 +4,7 @@
         <div class="col-lg-6 mb-lg-0 mb-2">
             <div class="card">
                 <div class="card-header pb-0 px-3">
-                    <h6 class="mb-0">Upload receipt to analysis</h6>
+                    <h6 class="mb-0">{{ __('index.test_upload_title') }}</h6>
                 </div>
                 <div class="card-body p-3">
                     <div class="row">
@@ -14,7 +14,7 @@
                                 <input id="image-input" type="file" class="form-control" name="image">
                                 <hr>
                                 <div class="text-body text-sm font-weight-bold text-center icon-move-right">
-                                    <a type="button" class="btn bg-gradient-dark mb-0" id="upload-image">Process</a>
+                                    <a type="button" class="btn bg-gradient-dark mb-0" id="upload-image">{{ __('index.test_process') }}</a>
                                 </div>
                             </form>
                         </div>
@@ -25,7 +25,7 @@
         <div class="col-lg-6">
         <div class="card">
             <div class="card-header pb-0 px-3">
-              <h6 class="mb-0">Billing Information</h6>
+              <h6 class="mb-0">{{ __('index.test_result') }}</h6>
             </div>
             <div class="card-body pt-4 p-3">
               <ul class="list-group">
@@ -45,7 +45,7 @@
                 <div class="modal-body">
                     <div class="row justify-content-center text-center">
                         <div class="loadingspinner m-3"></div>
-                        <p class="mt-4">Processing may take a few minutes. Please wait!</p>
+                        <p class="mt-4">{{ __('index.waiting_message') }}</p>
                     </div>
                 </div>
             </div>
