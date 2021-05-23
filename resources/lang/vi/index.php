@@ -5,6 +5,7 @@ return [
     'logout' => 'Đăng xuất',
     'login' => 'Đăng nhập',
     'no_data' => 'Không có dữ liệu người dùng',
+    'no_processing' => 'Không có hóa đơn đang đợi xử lý',
     // navigation
     'nav_dashboard' => 'Dashboard',
     'nav_reciepts' => 'Danh sách hóa đơn',
@@ -19,6 +20,7 @@ return [
     'dash_cost_analysis' => 'Phân tích chi phí',
     'dash_monthly_follow' => 'Phân tích thanh toán trong năm',
     // reciepts
+    'rpts_processing_reciepts' => 'Hóa đơn đang xử lý',
     'rpts_paid_reciepts' => 'Hóa đơn đã thanh toán',
     'rpts_bill' => 'Hóa đơn',
     'rpts_detail' => 'Chi tiết hóa đơn',

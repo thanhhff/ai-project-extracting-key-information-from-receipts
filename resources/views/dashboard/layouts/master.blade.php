@@ -33,6 +33,9 @@
   <link rel="stylesheet" href="{{asset('./assets/css/toastr.min.css')}}">
   <script src="{{asset('./assets/js/sweetalert2.min.js')}}"></script>
   <script src="{{asset('./assets/js/toastr.min.js')}}"></script>
+
+  <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">

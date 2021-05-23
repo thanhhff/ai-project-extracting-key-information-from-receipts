@@ -2012,7 +2012,7 @@ progress {
   margin-bottom: 1rem;
   color: #67748e;
   vertical-align: top;
-  border-color: #e9ecef;
+  border-color: #e9ecef !important;
 }
 
 .table> :not(caption)>*>* {

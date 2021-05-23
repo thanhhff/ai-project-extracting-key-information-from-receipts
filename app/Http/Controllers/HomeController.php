@@ -47,10 +47,10 @@ class HomeController extends BaseController
         $numOfBills = count($billInMonths);
         $billDiff = $numOfBills ? round(100 * ($numOfBills - count($billInPrevMonth)) / $numOfBills, 1) : 0;
 
-        $recentBills = array_slice($billInMonths->toArray(), 0, 10);
+        $recentBills  = Bill::whereUserId($this->user->id)->orderBy('payment_date', 'desc')->take(10)->get();
         $categories = Category::all();
 
-        $totalBills = Bill::whereUserId($this->user->id)->get();
+        $totalBills = Bill::whereUserId($this->user->id)->whereStatus(2)->get();
         $billGrCategory = collect($totalBills)->groupBy('category_id')->sortKeys();
 
         return view('dashboard.index', compact('totalAmountInMonths', 'numOfBills', 
@@ -59,8 +59,9 @@ class HomeController extends BaseController
     }
 
     public function bills() {
-        $bills = Bill::with(['image', 'category'])->whereUserId($this->user->id)->orderBy('created_at', 'desc')->paginate(15);
-        return view('dashboard.bills', compact('bills'));
+        $processingBills = Bill::with(['image', 'category'])->whereUserId($this->user->id)->whereStatus(1)->orderBy('created_at', 'desc')->get();
+        $bills = Bill::with(['image', 'category'])->whereUserId($this->user->id)->where('status', '!=', 1)->orderBy('created_at', 'desc')->get();
+        return view('dashboard.bills', compact('processingBills', 'bills'));
     }
 
     public function newBill() {

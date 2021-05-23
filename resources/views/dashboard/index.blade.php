@@ -95,7 +95,7 @@
               @foreach($recentBills as $bill)
                 <div class="timeline-block mb-3">
                   <span class="timeline-step">
-                    @switch($bill['category_id'])
+                    @switch($bill->category_id)
                       @case(1)
                         <i class="fa fa-cutlery text-warning text-gradient"></i>
                         @break
@@ -117,11 +117,11 @@
                     @endswitch
                   </span>
                   <div class="timeline-content">
-                    <a href="{{route('bill.edit', $bill['id'])}}" class="text-success text-sm font-weight-bold mb-0">
-                      #{{$bill['id']}} &nbsp; &nbsp;&nbsp;
+                    <a href="{{route('bill.edit', $bill->id)}}" class="text-success text-sm font-weight-bold mb-0">
+                      #{{$bill->id}} &nbsp; &nbsp;&nbsp;
                     </a>
-                    <span class="text-dark text-sm font-weight-bold mb-0">{{\App\Helpers\format_currency($bill['total'])}}</span>
-                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{\App\Helpers\format_date($bill['payment_date'])}}</p>
+                    <span class="text-dark text-sm font-weight-bold mb-0">{{\App\Helpers\format_currency($bill->total)}}</span>
+                    <p class="text-secondary font-weight-bold text-xs mt-1 mb-0">{{\App\Helpers\format_date($bill->payment_date)}}</p>
                   </div>
                 </div>
               @endforeach
@@ -147,7 +147,7 @@
           @endif
         </div>
       </div>
-      <div class="card">
+      <!-- <div class="card">
         <div class="card-header pb-0">
           <h6>{{ __('index.dash_monthly_follow') }}</h6>
         </div>
@@ -162,7 +162,7 @@
           </div>
           @endif
         </div>
-      </div>
+      </div> -->
       
     </div>
   </div>
