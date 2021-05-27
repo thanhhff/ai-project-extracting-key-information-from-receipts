@@ -137,7 +137,6 @@
                             <h5 class="mb-0 pt-2">{{ __('index.rpts_paid_reciepts') }}</h6>
                         </div>
                         <div class="col-md-4 d-flex justify-content-end align-items-center">
-                            <!-- <input type="text" name="dates" class="form-control ml-2" {{ count($bills) <= 0 ? 'disabled' : '' }} style="width: auto"/> -->
                         </div>
                     </div>
                 </div>
@@ -175,29 +174,15 @@
         let bills = {!! json_encode($bills); !!};
 
         $(document).ready( function () {
-            $.fn.dataTable.ext.search.push(
-                function( settings, data, dataIndex ) {
-                    var date = moment(data[6], "DD/MM/YYYY")
-                    console.log(date)
-
-                    if (( startDate === null && endDate === null )  || ( startDate === null && date.diff(endDate, 'days') <= 0 ) ||
-                        ( startDate.diff(date, 'days') <= 0 && endDate === null ) || ( startDate.diff(date, 'days') <= 0 && date.diff(endDate, 'days') <= 0 )) {
-                        return true;
-                    }
-                    return false;
-                }
-            );
-
             let paidRecieptsTable = $('#paid_reciepts').DataTable( {
                 data: bills,
-                paging:   false,
-                pageLength: 10,
-                searching: false,
+                searching: true,
                 ordering: true,
                 order: [[0, 'desc']],
                 info:     false,
-                lengthChange: false,
+                lengthChange: true,
                 orderMulti: false,
+                paging:   true,
                 columns: [
                     { data: "id", class: "align-middle text-center text-sm" },
                     { data: "status", class: "align-middle text-center text-sm" },
@@ -261,9 +246,9 @@
                         "render": function ( data, type, row ) {
                             let p =  `
                                 <div class="ms-auto">
-                                    <a class="btn btn-link text-dark px-2 mb-0" data-bs-toggle="modal" data-bs-target="#detailModal" onclick="${showDetail(data)}">
+                                    <button class="btn btn-link text-dark px-2 mb-0" data-bs-toggle="modal" data-bs-target="#detailModal" onclick="showDetail(${data})">
                                         <i class="far fa-eye me-2"></i>{{ __('index.rpt_view') }}
-                                    </a>
+                                    </button>
                                     <a class="btn btn-link text-dark px-2 mb-0" href="{{route('bill.edit', ':id')}}">
                                         <i class="fas fa-pencil-alt text-dark me-2"></i>{{ __('index.rpt_edit') }}
                                     </a>
@@ -274,19 +259,6 @@
                         "orderable": false
                     },
                 ]
-            });
-
-            $('input[name="dates"]').daterangepicker({
-                startDate: startDate,
-                locale: {
-                    format: 'DD/MM/YYYY',
-                }, 
-                maxDate: moment()
-            }, function(start, end, label) {
-                startDate = start
-                endDate = end
-                console.log(paidRecieptsTable)
-                paidRecieptsTable.draw() 
             });
         });
 

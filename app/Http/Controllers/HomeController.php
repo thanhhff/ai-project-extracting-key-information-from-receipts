@@ -126,7 +126,9 @@ class HomeController extends BaseController
             'note' => $request->note,
             'status' => 2
         ]);
-        return redirect()->route('bills')->with(['type' => 'success', 'message' => "Cập nhật thành công"]);
+        $message = session()->get('locale') == 'en' ? 'The reciept has been updated' : 'Cập nhật thành công';
+
+        return redirect()->route('bills')->with(['type' => 'success', 'message' => $message]);
     }
 
     public function deleteBill($id) {
@@ -136,7 +138,9 @@ class HomeController extends BaseController
         }   
         $bill->image->delete();
         $bill->delete();
-        return redirect()->route('bills')->with(['type' => 'success', 'message' => "Hóa đơn đã được xóa"]);
+        $message = session()->get('locale') == 'en' ? 'The reciept has been deleted' : 'Hóa đơn đã được xóa';
+
+        return redirect()->route('bills')->with(['type' => 'success', 'message' => $message]);
     }
 
     public function analysis() {
@@ -165,11 +169,11 @@ class HomeController extends BaseController
             'image' => $image
         ];
 
-        $response = $this->client->post( env('IMAGE_SERVER_URL'), ['form_params' => $uploadData]);
-        $data = json_decode($response->getBody()->getContents());
+        $responseUpload = $this->client->post( env('IMAGE_SERVER_URL'), ['form_params' => $uploadData]);
+        $data = json_decode($responseUpload->getBody()->getContents());
 
-        $response = $this->client->get(env('API_URL') . '?url=' . $data->data->url);
+        $responseProcess = $this->client->get(env('API_URL') . '?url=' . $data->data->url);
 
-        return response()->json(['status' => 'success', 'data' => $response->getBody()->getContents()]);
+        return response()->json(['status' => 'success', 'data' => $responseProcess->getBody()->getContents()]);
     }
 }

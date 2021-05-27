@@ -47,9 +47,9 @@
           <ul class="navbar-nav justify-content-end">
             <li class="nav-item" style="margin-right: 1rem">
               @if( Config::get('app.locale') == 'en')
-                <a href="{{route('language', 'vi')}}" class="nav-link pe-0 text-muted">🇻🇳 Vietnam</a>
+                <a href="{{route('language', 'vi')}}" class="nav-link pe-0 text-muted">🇺🇸 English</a>
               @elseif( Config::get('app.locale') == 'vi' )
-                <a href="{{route('language', 'en')}}" class="nav-link pe-0 text-muted">🇺🇸 English</a>
+                <a href="{{route('language', 'en')}}" class="nav-link pe-0 text-muted">🇻🇳 Vietnam</a>
               @endif
             </li>
             <li class="nav-item dropdown pe-2 d-flex align-items-center">

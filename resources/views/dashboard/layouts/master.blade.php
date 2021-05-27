@@ -34,8 +34,9 @@
   <script src="{{asset('./assets/js/sweetalert2.min.js')}}"></script>
   <script src="{{asset('./assets/js/toastr.min.js')}}"></script>
 
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+  <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -48,7 +49,7 @@
     </div>
   </main>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="{{asset('./assets/js/soft-ui-dashboard.min.js')}}"></script>
+  <script src="{{asset('./assets/js/soft-ui-dashboard.js')}}"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
