@@ -101,8 +101,11 @@ class HomeController extends BaseController
         ]);
 
         AnalysisImage::dispatch($bill->id);
+        $message = session()->get('locale') == 'en'
+            ? 'The reciept added successfully! Processing may take a few minutes.' 
+            : 'Thêm hóa đơn thành công! Quá trình xử lý có thể mất một vài phút.';
 
-        return redirect()->route('bills')->with(['type' => 'success', 'message' => "Thêm hóa đơn thành công! Quá trình xử lý có thể mất một vài phút."]);
+        return redirect()->route('bills')->with(['type' => 'success', 'message' => $message]);
 
     }
 
