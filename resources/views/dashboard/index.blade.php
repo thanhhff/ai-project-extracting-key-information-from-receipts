@@ -147,22 +147,6 @@
           @endif
         </div>
       </div>
-      <!-- <div class="card">
-        <div class="card-header pb-0">
-          <h6>{{ __('index.dash_monthly_follow') }}</h6>
-        </div>
-        <div class="card-body p-3">
-          @if(count($totalBills) <= 0)
-            <div class="text-center m-4">
-              <h6 style="color: red">{{ __('index.no_data') }}</h6>
-            </div>
-          @else
-          <div class="chart">
-            <canvas id="chart-line" class="chart-canvas" height="300px"></canvas>
-          </div>
-          @endif
-        </div>
-      </div> -->
       
     </div>
   </div>
@@ -207,95 +191,6 @@
               text: 'Các loại chi phí'
             }
           }
-        },
-      });
-    }
-
-    
-
-    var ctx2 = document.getElementById("chart-line").getContext("2d");
-
-    if(ctx2) {
-      var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-      gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-      gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-      gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); 
-
-      var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-      gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-      gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-      gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); 
-
-
-      new Chart(ctx2, {
-        type: "line",
-        data: {
-          labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-          datasets: [{
-              label: "Số tiền thanh toán",
-              tension: 0.4,
-              borderWidth: 0,
-              pointRadius: 0,
-              borderColor: "#cb0c9f",
-              borderWidth: 3,
-              backgroundColor: gradientStroke1,
-              data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-              maxBarThickness: 6
-
-            }
-          ],
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          legend: {
-            display: false,
-          },
-          tooltips: {
-            enabled: true,
-            mode: "index",
-            intersect: false,
-          },
-          scales: {
-            yAxes: [{
-              gridLines: {
-                borderDash: [2],
-                borderDashOffset: [2],
-                color: '#dee2e6',
-                zeroLineColor: '#dee2e6',
-                zeroLineWidth: 1,
-                zeroLineBorderDash: [2],
-                drawBorder: false,
-              },
-              ticks: {
-                suggestedMin: 0,
-                suggestedMax: 500,
-                beginAtZero: true,
-                padding: 10,
-                fontSize: 11,
-                fontColor: '#adb5bd',
-                lineHeight: 3,
-                fontStyle: 'normal',
-                fontFamily: "Open Sans",
-              },
-            }, ],
-            xAxes: [{
-              gridLines: {
-                zeroLineColor: 'rgba(0,0,0,0)',
-                display: false,
-              },
-              ticks: {
-                padding: 10,
-                fontSize: 11,
-                fontColor: '#adb5bd',
-                lineHeight: 3,
-                fontStyle: 'normal',
-                fontFamily: "Open Sans",
-              },
-            }, ],
-          },
         },
       });
     }
